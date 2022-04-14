@@ -1,0 +1,45 @@
+/* @value makerGreen from "/common/colors.css"; REVIEW */
+@value makerGreen from "../../common/colors.css";
+
+header {
+  background: makerGreen;
+  text-align: center;
+  color: white;
+  padding: 1.5em 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small {
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.big {
+  gap: 1em;
+}
+
+.small img {
+  width: 10%;
+}
+
+.big img {
+  width: 4%;
+}
+
+.logout {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5em 1em;
+  border: 0.2rem solid white;
+  border-radius: 1rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.logout:hover {
+  background: white;
+  color: makerGreen;
+}

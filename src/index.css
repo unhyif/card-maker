@@ -1,0 +1,37 @@
+@import-normalize;
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+button {
+  background: none;
+  cursor: pointer;
+  border: none;
+}
+
+input,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}

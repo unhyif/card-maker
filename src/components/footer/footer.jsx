@@ -1,6 +1,6 @@
 import styles from "./footer.module.css";
 
-const Footer = (props) => (
+const Footer = () => (
   <footer>
     <p>Code your dream</p>
   </footer>

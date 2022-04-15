@@ -7,7 +7,7 @@ const Header = memo(({ logout, setUser, size }) => {
       await logout();
       setUser(null);
     } catch (e) {
-      console.error(e); // TODO: modal
+      console.error(e);
     }
   };
 

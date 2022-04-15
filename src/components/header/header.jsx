@@ -1,14 +1,18 @@
 import styles from "./header.module.css";
 
-const Header = ({ logout, setUser, size }) => {
+const Header = ({ authService, setUser, size }) => {
   const handleLogout = async () => {
-    await logout();
-    setUser(null);
+    try {
+      await authService.logout();
+      setUser(null);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
     <header className={styles[size]}>
-      {logout && (
+      {authService && (
         <button className={styles.logout} onClick={handleLogout}>
           logout
         </button>

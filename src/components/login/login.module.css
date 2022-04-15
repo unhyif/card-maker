@@ -22,6 +22,17 @@
   padding: 1em;
 }
 
+.error {
+  color: rgb(180, 0, 0);
+  margin-top: 1em;
+  display: none;
+}
+
+.services {
+  width: 100%;
+  margin-top: 1.5em;
+}
+
 .google,
 .github {
   width: 100%;
@@ -33,7 +44,7 @@
 }
 
 .google {
-  margin: 1.5em 0 0.625em 0;
+  margin-bottom: 0.625em;
 }
 
 .google:hover,

@@ -1,8 +1,8 @@
 import styles from "./main.module.css";
 
-const Main = ({ user }) => (
+const Main = ({ id }) => (
   <main>
-    <p>Welcome {user}!</p>
+    <p>Welcome {id}!</p>
   </main>
 );
 

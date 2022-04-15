@@ -1,11 +1,13 @@
 import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 
-const Header = memo(({ logout, setUser, size }) => {
+const Header = memo(({ logout, size }) => {
+  const navigate = useNavigate();
   const onLogout = async () => {
     try {
       await logout();
-      setUser(null);
+      navigate("/login");
     } catch (e) {
       console.error(e);
     }

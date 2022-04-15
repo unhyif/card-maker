@@ -1,15 +1,17 @@
 import { memo, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import styles from "./login.module.css";
 
-const Login = memo(({ login, setUser }) => {
+const Login = memo(({ login }) => {
+  const navigate = useNavigate();
   const errorRef = useRef();
 
   const onLogin = async (providerName) => {
     try {
-      const username = await login(providerName);
-      setUser(username);
+      const id = await login(providerName);
+      navigate("/", { state: { id: id } });
     } catch (e) {
       errorRef.current.innerText = e.message;
       errorRef.current.style.display = "block";

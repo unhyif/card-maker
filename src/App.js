@@ -8,25 +8,21 @@ import styles from "app.module.css";
 import Home from "page/home";
 
 function App({ authService }) {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    user ? navigate("/") : navigate("/login");
-  }, [user]);
+    navigate("/login");
+    // user ? navigate("/") : navigate("/login");
+  }, []);
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Home authService={authService} user={user} setUser={setUser} />
-        }
-      />
+      <Route path="/" element={<Home authService={authService} />} />
       <Route
         path="/login"
         element={
           <div className={styles.background}>
-            <Login login={authService.login} setUser={setUser} />
+            <Login login={authService.login} />
           </div>
         }
       />

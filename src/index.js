@@ -9,7 +9,9 @@ const authService = new AuthService();
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <App authService={authService} />
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <App authService={authService} />
+    </BrowserRouter>
+  </React.StrictMode>
 );

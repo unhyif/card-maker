@@ -18,7 +18,7 @@ export class AuthService {
 
   login = async (providerName) =>
     signInWithPopup(this.auth, this[`${providerName}Provider`]).then(
-      (result) => result.user.displayName
+      (result) => result.user.uid
     );
   // This gives you a Google Access Token. You can use it to access the Google API.
   // const credential = GoogleAuthProvider.credentialFromResult(result);

@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { AuthService } from "service/authentication";
 import Login from "components/login/login";
 import Header from "components/header/header";
 import Main from "components/main/main";
 import Footer from "components/footer/footer";
-import "app.css";
+import styles from "app.module.css";
 
-const authService = new AuthService();
-
-function App() {
+function App({ authService }) {
   const [user, setUser] = useState(null);
 
   return user ? (
     <>
-      <Header authService={authService} setUser={setUser} size="big" />
+      <Header logout={authService.logout} setUser={setUser} size="big" />
       <Main user={user} />
       <Footer />
     </>
   ) : (
-    <Login authService={authService} setUser={setUser} />
+    <div className={styles.background}>
+      <Login login={authService.login} setUser={setUser} />
+    </div>
   );
 }
 

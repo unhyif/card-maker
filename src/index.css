@@ -36,6 +36,6 @@ body {
   height: 100vh;
 }
 
-main {
+#root > main {
   flex-grow: 1;
 }

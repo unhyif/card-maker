@@ -1,26 +1,27 @@
+import { memo } from "react";
 import styles from "./header.module.css";
 
-const Header = ({ authService, setUser, size }) => {
-  const handleLogout = async () => {
+const Header = memo(({ logout, setUser, size }) => {
+  const onLogout = async () => {
     try {
-      await authService.logout();
+      await logout();
       setUser(null);
     } catch (e) {
-      console.error(e);
+      console.error(e); // TODO: modal
     }
   };
 
   return (
     <header className={styles[size]}>
-      {authService && (
-        <button className={styles.logout} onClick={handleLogout}>
-          logout
+      {logout && (
+        <button className={styles.logout} onClick={onLogout}>
+          Logout
         </button>
       )}
-      <img src="/images/logo.png" alt="logo" />
-      <h1>Business Card Maker</h1>
+      <img src="/images/logo.png" alt="logo" className={styles.logo} />
+      <h1 className={styles.title}>Business Card Maker</h1>
     </header>
   );
-};
+});
 
 export default Header;

@@ -1,13 +1,5 @@
 @value makerGreen from "../../common/colors.css";
 
-.background {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-}
-
 .wrapper {
   width: 48rem;
   position: relative;
@@ -23,7 +15,7 @@
 }
 
 .error {
-  color: rgb(180, 0, 0);
+  color: rgb(210, 0, 0);
   margin-top: 1em;
   display: none;
 }

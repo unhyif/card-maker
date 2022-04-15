@@ -7,45 +7,33 @@ import {
   signOut,
 } from "firebase/auth";
 
-const auth = getAuth();
-auth.useDeviceLanguage();
-
-const getProvider = (providerName) => {
-  switch (providerName) {
-    case "google":
-      return new GoogleAuthProvider();
-    case "github":
-      return new GithubAuthProvider();
-    default:
-      throw new Error("We can't find corresponding provider");
-  }
-};
-
 export class AuthService {
-  async login(providerName) {
-    return signInWithPopup(auth, getProvider(providerName))
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        return user.displayName;
-      })
+  constructor() {
+    this.auth = getAuth();
+    this.auth.useDeviceLanguage();
+
+    this.googleProvider = new GoogleAuthProvider();
+    this.githubProvider = new GithubAuthProvider();
+  }
+
+  login = async (providerName) =>
+    signInWithPopup(this.auth, this[`${providerName}Provider`])
+      .then((result) => result.user.displayName)
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
       .catch((e) => {
+        throw new Error(e.message);
         // const errorCode = e.code;
-        const errorMessage = e.message;
         // The email of the user's account used.
         // const email = e.email;
         // The AuthCredential type that was used.
         // const credential = GoogleAuthProvider.credentialFromError(e);
-        throw new Error(errorMessage);
       });
-  }
 
-  async logout() {
-    return signOut(auth).catch((e) => {
+  logout = async () => {
+    return signOut(this.auth).catch((e) => {
       throw new Error(e.message);
     });
-  }
+  };
 }

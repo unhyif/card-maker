@@ -1,17 +1,21 @@
-import { memo, useRef } from "react";
+import { memo, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import styles from "./login.module.css";
 
-const Login = memo(({ login }) => {
+const Login = memo(({ authService }) => {
   const navigate = useNavigate();
-  const errorRef = useRef();
+  useEffect(() => {
+    authService.onAuthChange(
+      (user) => user && navigate("/", { state: { id: user.uid } })
+    );
+  }, []);
 
+  const errorRef = useRef();
   const onLogin = async (providerName) => {
     try {
-      const id = await login(providerName);
-      navigate("/", { state: { id: id } });
+      const result = await authService.login(providerName); // REVIEW: 에러가 변수에 담겨야 catch 됨
     } catch (e) {
       errorRef.current.innerText = e.message;
       errorRef.current.style.display = "block";

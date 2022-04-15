@@ -1,19 +1,16 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Login from "components/login/login";
-// import Header from "components/header/header";
-// import Main from "components/main/main";
-// import Footer from "components/footer/footer";
 import styles from "app.module.css";
 import Home from "page/home";
 
 function App({ authService }) {
-  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/login");
-    // user ? navigate("/") : navigate("/login");
-  }, []);
+    authService.onAuthChange((user) =>
+      user ? navigate("/", { state: { id: user.uid } }) : navigate("/login")
+    );
+  }, []); // TODO: 로그인 된 상태에서 새로고침 했을 때 navigate 안 쓰고 location 정보 갖는 방법?
 
   return (
     <Routes>
@@ -22,7 +19,7 @@ function App({ authService }) {
         path="/login"
         element={
           <div className={styles.background}>
-            <Login login={authService.login} />
+            <Login authService={authService} />
           </div>
         }
       />

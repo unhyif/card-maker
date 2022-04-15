@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export class AuthService {
@@ -17,12 +18,10 @@ export class AuthService {
   }
 
   login = async (providerName) =>
-    signInWithPopup(this.auth, this[`${providerName}Provider`]).then(
-      (result) => result.user.uid
-    );
-  // This gives you a Google Access Token. You can use it to access the Google API.
-  // const credential = GoogleAuthProvider.credentialFromResult(result);
-  // const token = credential.accessToken;
+    signInWithPopup(this.auth, this[`${providerName}Provider`]);
 
   logout = async () => signOut(this.auth);
+
+  onAuthChange = (navigationCallback) =>
+    onAuthStateChanged(this.auth, (user) => navigationCallback(user));
 }

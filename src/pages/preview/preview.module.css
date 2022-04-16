@@ -1,0 +1,12 @@
+@value makerGreen from "../../common/colors.css";
+@value mediaQuery from "../../common/size.css";
+
+section {
+  flex-grow: 1; /* to set 50% for each */
+  padding: 1em;
+}
+
+.title {
+  text-align: center;
+  color: makerGreen;
+}

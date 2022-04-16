@@ -1,15 +1,16 @@
 import { useLocation } from "react-router-dom";
-import Section from "components/section/section";
+import Maker from "pages/maker/maker";
+import Preview from "pages/preview/preview";
 import styles from "./home.module.css";
 
-const Home = ({ authService }) => {
+const Home = () => {
   const { state } = useLocation(); // location 정보
   const id = state ? state.id : null;
 
   return (
     <main>
-      <Section title="Card Maker" />
-      <Section title="Card Preview" />
+      <Maker />
+      <Preview />
     </main>
   );
 };

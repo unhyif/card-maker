@@ -2,11 +2,8 @@
 @value mediaQuery from "../../common/size.css";
 
 section {
-  width: 50%;
+  flex-grow: 1; /* to set 50% for each */
   padding: 1em;
-}
-
-section:first-child {
   border-right: 0.1rem solid rgba(0, 0, 0, 0.1);
 }
 
@@ -17,11 +14,6 @@ section:first-child {
 
 @media screen and (max-width: mediaQuery) {
   section {
-    width: auto;
-    flex-grow: 1;
-  }
-
-  section:first-child {
     border-right: none;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
   }

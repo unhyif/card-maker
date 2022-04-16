@@ -20,7 +20,7 @@ function App({ authService }) {
   return (
     <Routes>
       <Route element={<Layout authService={authService} />}>
-        <Route path="/" element={<Home authService={authService} />} />
+        <Route path="/" element={<Home />} />
         {/* 마운트 될 때 location 정보 없이 Home이 일단 렌더링 됨 */}
       </Route>
 

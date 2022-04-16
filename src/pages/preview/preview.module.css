@@ -1,12 +1,19 @@
 @value makerGreen from "../../common/colors.css";
 @value mediaQuery from "../../common/size.css";
 
-section {
-  flex-grow: 1; /* to set 50% for each */
-  padding: 1em;
+.preview {
+  flex-basis: 50%;
+  padding: 2em;
 }
 
 .title {
   text-align: center;
   color: makerGreen;
+  margin-bottom: 1em;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

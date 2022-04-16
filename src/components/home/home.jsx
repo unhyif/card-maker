@@ -3,14 +3,14 @@ import Maker from "pages/maker/maker";
 import Preview from "pages/preview/preview";
 import styles from "./home.module.css";
 
-const Home = () => {
+const Home = ({ cards }) => {
   const { state } = useLocation(); // location 정보
   const id = state ? state.id : null;
 
   return (
-    <main>
-      <Maker />
-      <Preview />
+    <main className={styles.home}>
+      <Maker cards={cards} />
+      <Preview cards={cards} />
     </main>
   );
 };

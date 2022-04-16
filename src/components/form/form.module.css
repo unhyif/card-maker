@@ -1,0 +1,22 @@
+input {
+  border: 0.1rem solid black;
+}
+
+.first {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.second {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+input[name="message"] {
+  width: 100%;
+}
+
+.btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

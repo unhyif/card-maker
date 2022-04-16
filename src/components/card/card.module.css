@@ -1,0 +1,38 @@
+@value makerShadow, makerColorful, makerWheat from "../../common/colors.css";
+
+.card {
+  display: flex;
+  gap: 2em;
+  color: white;
+  border-radius: 1em;
+  padding: 1.5em;
+}
+
+.card.dark {
+  background: black;
+}
+
+.card.colorful {
+  background: makerColorful;
+}
+
+.card.light {
+  background: makerWheat;
+  color: black;
+}
+
+.photo {
+  width: 7em;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.divider {
+  height: 0.2rem;
+  background: white;
+}

@@ -1,11 +1,41 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "components/layout/layout";
 import Home from "components/home/home";
 import Login from "components/login/login";
 import styles from "app.module.css";
 
 function App({ authService }) {
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      name: "unhyif",
+      company: "Facebook",
+      theme: "Dark",
+      title: "Developer",
+      email: "@",
+      message: "React",
+    },
+    {
+      id: 2,
+      name: "unhyif",
+      company: "Facebook",
+      theme: "Colorful",
+      title: "Developer",
+      email: "@",
+      message: "React",
+    },
+    {
+      id: 3,
+      name: "unhyif",
+      company: "Facebook",
+      theme: "Light",
+      title: "Developer",
+      email: "@",
+      message: "React",
+    },
+  ]);
+
   // console.log(window.location.href); // REVIEW: navigate 할 때마다 App 실행됨
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +50,7 @@ function App({ authService }) {
   return (
     <Routes>
       <Route element={<Layout authService={authService} />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home cards={cards} />} />
         {/* 마운트 될 때 location 정보 없이 Home이 일단 렌더링 됨 */}
       </Route>
 

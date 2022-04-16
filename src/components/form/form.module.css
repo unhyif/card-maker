@@ -1,22 +1,54 @@
-input {
-  border: 0.1rem solid black;
+@value makerLightPink, makerGreen from "../../common/colors.css";
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 0.1rem solid black;
+  border-top: 0.1rem solid black;
 }
 
-.first {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.input,
+.select {
+  border: none;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+  /* flex: 1 1 calc(100% / 3); REVIEW */
+  flex-grow: 1;
+  width: calc(100% / 3);
 }
 
-.second {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-input[name="message"] {
+.textarea {
   width: 100%;
+  border: none;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
 }
 
-.btns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.input,
+.select,
+.textarea {
+  padding: 0.5em;
+  font-size: 1.4rem;
+  transition: 0.1s all ease-in-out; /* TODO: Use nesting plugin */
+}
+
+.input:focus,
+.textarea:focus {
+  background: makerLightPink;
+}
+
+.form button {
+  border: none;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+  width: 50%;
+}
+
+.form button:first-of-type {
+  background: pink;
+}
+
+.form button:last-of-type {
+  background: makerGreen;
+  color: white;
 }

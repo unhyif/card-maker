@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "components/layout/layout";
-import Home from "components/home/home";
+import Home from "pages/home/home";
 import Login from "components/login/login";
 import styles from "app.module.css";
 
@@ -11,28 +11,34 @@ function App({ authService }) {
       id: 1,
       name: "unhyif",
       company: "Facebook",
-      theme: "Dark",
+      theme: "dark",
       title: "Developer",
       email: "@",
       message: "React",
+      fileName: "Image",
+      fileURL: null,
     },
     {
       id: 2,
       name: "unhyif",
       company: "Facebook",
-      theme: "Colorful",
+      theme: "colorful",
       title: "Developer",
       email: "@",
       message: "React",
+      fileName: "Image",
+      fileURL: null,
     },
     {
       id: 3,
       name: "unhyif",
       company: "Facebook",
-      theme: "Light",
+      theme: "light",
       title: "Developer",
       email: "@",
       message: "React",
+      fileName: "Image",
+      fileURL: null,
     },
   ]);
 

@@ -8,7 +8,7 @@ const Maker = ({ cards }) => (
       {cards.map((card) => (
         <Form key={card.id} card={card} />
       ))}
-      <Form key={Date.now()} card={{}} />
+      <Form key={Date.now()} card={{}} newMaker={true} />
     </section>
   </section>
 );

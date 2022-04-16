@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import Maker from "pages/maker/maker";
-import Preview from "pages/preview/preview";
+import Maker from "components/maker/maker";
+import Preview from "components/preview/preview";
 import styles from "./home.module.css";
 
 const Home = ({ cards }) => {

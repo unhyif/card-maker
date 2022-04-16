@@ -1,39 +1,55 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
+import Button from "components/button/button";
 import styles from "./form.module.css";
 
-const Form = ({ card: { name, company, theme, title, email, message } }) => {
-  //   useEffect(() => {
-  //     document.querySelector(`option[data-value=${theme}]`).selected = true;
-  //   }, []);
+const Form = ({ card, handleDelete, newMaker }) => {
+  const { name, company, theme, title, email, message, fileName } = card;
+  const onDelete = useCallback(() => card);
 
   return (
-    <form>
-      <div className={styles.first}>
-        <input name="name" defaultValue={name} placeholder="Name" />
-        <input name="company" defaultValue={company} placeholder="Company" />
-        <select name="theme">
-          <option data-value="Dark" defaultValue="Dark">
-            Dark
-          </option>
-          <option data-value="Colorful" defaultValue="Colorful">
-            Colorful
-          </option>
-          <option data-value="Light" defaultValue="Light">
-            Light
-          </option>
-        </select>
-      </div>
-      <div className={styles.second}>
-        <input name="title" defaultValue={title} placeholder="Title" />
-        <input name="email" defaultValue={email} placeholder="Email" />
-      </div>
-      <div className={styles.third}>
-        <input name="message" defaultValue={message} placeholder="Message" />
-      </div>
-      <div className={styles.btns}>
-        <button>File</button>
-        <button>Delete</button>
-      </div>
+    <form className={`${styles.form} ${newMaker && "new"}`}>
+      <input
+        className={styles.input}
+        name="name"
+        defaultValue={name}
+        placeholder="Name"
+      />
+      <input
+        className={styles.input}
+        name="company"
+        defaultValue={company}
+        placeholder="Company"
+      />
+      <select className={styles.select} name="theme" value={theme}>
+        {/* REVIEW: default option */}
+        <option value="dark">Dark</option>
+        <option value="colorful">Colorful</option>
+        <option value="light">Light</option>
+      </select>
+
+      <input
+        className={styles.input}
+        name="title"
+        defaultValue={title}
+        placeholder="Title"
+      />
+      <input
+        className={styles.input}
+        type="email"
+        name="email"
+        defaultValue={email}
+        placeholder="Email"
+      />
+
+      <textarea
+        className={styles.textarea}
+        name="message"
+        defaultValue={message}
+        placeholder="Message"
+      />
+
+      <Button content={fileName} />
+      <Button content="Delete" onClick={onDelete} />
     </form>
   );
 };

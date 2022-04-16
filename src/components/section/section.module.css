@@ -1,0 +1,28 @@
+@value makerGreen from "../../common/colors.css";
+@value mediaQuery from "../../common/size.css";
+
+section {
+  width: 50%;
+  padding: 1em;
+}
+
+section:first-child {
+  border-right: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: makerGreen;
+}
+
+@media screen and (max-width: mediaQuery) {
+  section {
+    width: auto;
+    height: 50%;
+  }
+
+  section:first-child {
+    border-right: none;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  }
+}

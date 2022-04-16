@@ -1,8 +1,10 @@
+import Section from "components/section/section";
 import styles from "./main.module.css";
 
 const Main = ({ id }) => (
   <main>
-    <p>Welcome {id}!</p>
+    <Section title="Card Maker" />
+    <Section title="Card Preview" />
   </main>
 );
 

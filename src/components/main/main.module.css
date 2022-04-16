@@ -1,0 +1,12 @@
+@value mediaQuery from "../../common/size.css";
+
+main {
+  flex-grow: 1;
+  display: flex;
+}
+
+@media screen and (max-width: mediaQuery) {
+  main {
+    flex-direction: column;
+  }
+}

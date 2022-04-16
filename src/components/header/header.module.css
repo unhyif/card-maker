@@ -1,5 +1,6 @@
 /* @value makerGreen from "/common/colors.css"; REVIEW */
 @value makerGreen from "../../common/colors.css";
+@value mediaQuery from "../../common/size.css";
 
 header {
   background: makerGreen;
@@ -26,13 +27,13 @@ header {
 }
 
 .big .logo {
-  width: 4%;
+  width: 3em;
 }
 
 .logout {
   position: absolute;
-  right: 0.625em;
-  top: 0.625em;
+  right: 1em;
+  top: 1em;
   padding: 0.5em 1em;
   border: 0.2rem solid white;
   border-radius: 1rem;
@@ -42,4 +43,16 @@ header {
 .logout:hover {
   background: white;
   color: makerGreen;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .big .title {
+    font-size: 2.5rem;
+  }
+
+  .logout {
+    font-size: 1.2rem;
+    right: 1em;
+    top: 1em;
+  }
 }

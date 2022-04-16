@@ -5,9 +5,8 @@ import Main from "components/main/main";
 import Footer from "components/footer/footer";
 
 const Home = ({ authService }) => {
-  const {
-    state: { id },
-  } = useLocation(); // location 정보
+  const { state } = useLocation(); // location 정보
+  const id = state ? state.id : null;
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +19,7 @@ const Home = ({ authService }) => {
     } catch (e) {
       console.error(e);
     }
-  });
+  }, []);
 
   return (
     <>

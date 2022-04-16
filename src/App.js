@@ -15,6 +15,7 @@ function App({ authService }) {
   return (
     <Routes>
       <Route path="/" element={<Home authService={authService} />} />
+      {/* 마운트 될 때 location 정보 없이 Home이 렌더링 됨 */}
       <Route
         path="/login"
         element={

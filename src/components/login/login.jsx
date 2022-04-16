@@ -1,17 +1,9 @@
-import { memo, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { memo, useRef } from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import styles from "./login.module.css";
 
 const Login = memo(({ authService }) => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    authService.onAuthChange(
-      (user) => user && navigate("/", { state: { id: user.uid } })
-    );
-  }, []);
-
   const errorRef = useRef();
   const onLogin = async (providerName) => {
     try {

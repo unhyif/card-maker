@@ -46,6 +46,10 @@ header {
 }
 
 @media screen and (max-width: mediaQuery) {
+  .big {
+    gap: 0.5em;
+  }
+
   .big .title {
     font-size: 2.5rem;
   }

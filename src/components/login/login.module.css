@@ -1,4 +1,5 @@
 @value makerGreen from "../../common/colors.css";
+@value mediaQuery from "../../common/size.css";
 
 .wrapper {
   width: 48rem;
@@ -43,4 +44,10 @@
 .github:hover {
   background: makerGreen;
   color: white;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .wrapper {
+    width: 40rem;
+  }
 }

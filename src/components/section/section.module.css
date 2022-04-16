@@ -18,7 +18,7 @@ section:first-child {
 @media screen and (max-width: mediaQuery) {
   section {
     width: auto;
-    height: 50%;
+    flex-grow: 1;
   }
 
   section:first-child {

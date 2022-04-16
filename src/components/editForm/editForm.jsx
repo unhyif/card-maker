@@ -2,11 +2,9 @@ import { memo } from "react";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
-const EditForm = memo(({ card, setCards }) => {
+const EditForm = memo(({ card, deleteCard }) => {
   const { name, company, theme, title, email, message, fileName } = card;
-  const handleDelete = () => {
-    setCards((cards) => cards.filter((item) => item !== card));
-  };
+  const onDelete = () => deleteCard(card);
 
   return (
     <form className={styles.form}>
@@ -55,8 +53,8 @@ const EditForm = memo(({ card, setCards }) => {
         required
       />
 
-      <Button content={fileName} />
-      <Button type="button" content="Delete" onClick={handleDelete} />
+      <Button type="button" content={fileName} />
+      <Button type="button" content="Delete" onClick={onDelete} />
     </form>
   );
 });

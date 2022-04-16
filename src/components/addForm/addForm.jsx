@@ -2,12 +2,12 @@ import { memo } from "react";
 import Button from "components/button/button";
 import styles from "./addForm.module.css";
 
-const AddForm = memo(({ setCards }) => {
-  const handleSubmit = (e) => {
+const AddForm = memo(({ addCard }) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const data = new FormData(e.target);
-    const newCard = {
+    const card = {
       id: Date.now(),
       name: data.get("name"),
       company: data.get("company"),
@@ -15,17 +15,17 @@ const AddForm = memo(({ setCards }) => {
       title: data.get("title"),
       email: data.get("email"),
       message: data.get("message"),
-      fileName: "Image",
+      fileName: null,
       fileURL: null,
     };
     e.target.reset();
-    setCards((cards) => [...cards, newCard]);
+    addCard(card);
   };
 
   // const handleDelete = () => card
 
   return (
-    <form action="post" className={styles.form} onSubmit={handleSubmit}>
+    <form action="post" className={styles.form} onSubmit={onSubmit}>
       <input className={styles.input} name="name" placeholder="Name" required />
       <input
         className={styles.input}
@@ -60,8 +60,8 @@ const AddForm = memo(({ setCards }) => {
         required
       />
 
-      <Button content="No file" />
-      <Button type="button" content="Delete" />
+      <Button type="button" content="No file" />
+      <Button content="Add" />
     </form>
   );
 });

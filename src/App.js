@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Layout from "components/layout/layout";
 import Home from "pages/home/home";
 import Login from "components/login/login";
@@ -40,9 +40,19 @@ function App({ authService }) {
       fileName: "Image",
       fileURL: null,
     },
-  ]);
+  ]); // REVIEW: Home에서 관리하기
 
-  // console.log(window.location.href); // REVIEW: navigate 할 때마다 App 실행됨
+  const deleteCard = useCallback(
+    (card) => setCards((cards) => cards.filter((item) => item !== card)),
+    []
+  );
+
+  const addCard = useCallback(
+    (card) => setCards((cards) => [...cards, card]),
+    []
+  );
+
+  // console.log(window.location.href); // REVIEW: navigate 할 때마다 App 실행됨 but state는 초기화되지 않음
   const navigate = useNavigate();
   useEffect(() => {
     authService.onAuthChange(
@@ -56,7 +66,12 @@ function App({ authService }) {
   return (
     <Routes>
       <Route element={<Layout authService={authService} />}>
-        <Route path="/" element={<Home cards={cards} setCards={setCards} />} />
+        <Route
+          path="/"
+          element={
+            <Home cards={cards} deleteCard={deleteCard} addCard={addCard} />
+          }
+        />
         {/* 마운트 될 때 location 정보 없이 Home이 일단 렌더링 됨 */}
       </Route>
 

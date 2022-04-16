@@ -3,13 +3,13 @@ import Maker from "components/maker/maker";
 import Preview from "components/preview/preview";
 import styles from "./home.module.css";
 
-const Home = ({ cards, setCards }) => {
+const Home = ({ cards, deleteCard, addCard }) => {
   const { state } = useLocation(); // location 정보
   const id = state ? state.id : null;
 
   return (
     <main className={styles.home}>
-      <Maker cards={cards} setCards={setCards} />
+      <Maker cards={cards} deleteCard={deleteCard} addCard={addCard} />
       <Preview cards={cards} />
     </main>
   );

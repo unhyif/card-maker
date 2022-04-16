@@ -1,0 +1,52 @@
+@value makerLightPink, makerGreen from "../../common/colors.css";
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 0.1rem solid black;
+  border-top: 0.1rem solid black;
+}
+
+.input,
+.select {
+  border: none;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+  flex: 1 1 calc(100% / 3);
+  min-width: 0;
+}
+
+.textarea {
+  width: 100%;
+  border: none;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+}
+
+.input,
+.select,
+.textarea {
+  padding: 0.5em;
+  font-size: 1.4rem;
+  transition: 0.1s all ease-in-out; /* TODO: Use nesting plugin */
+}
+
+.input:focus,
+.textarea:focus {
+  background: makerLightPink;
+}
+
+.form button {
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+  width: 50%;
+}
+
+.form button:first-of-type {
+  background: lightgray;
+}
+
+.form button:last-of-type {
+  background: makerGreen;
+  color: white;
+}

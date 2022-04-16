@@ -1,26 +1,30 @@
-import { useCallback } from "react";
+import { memo } from "react";
 import Button from "components/button/button";
-import styles from "./form.module.css";
+import styles from "./editForm.module.css";
 
-const Form = ({ card, handleDelete, newMaker }) => {
+const EditForm = memo(({ card, setCards }) => {
   const { name, company, theme, title, email, message, fileName } = card;
-  const onDelete = useCallback(() => card);
+  const handleDelete = () => {
+    setCards((cards) => cards.filter((item) => item !== card));
+  };
 
   return (
-    <form className={`${styles.form} ${newMaker && "new"}`}>
+    <form className={styles.form}>
       <input
         className={styles.input}
         name="name"
         defaultValue={name}
         placeholder="Name"
+        required
       />
       <input
         className={styles.input}
         name="company"
         defaultValue={company}
         placeholder="Company"
+        required
       />
-      <select className={styles.select} name="theme" value={theme}>
+      <select className={styles.select} name="theme" defaultValue={theme}>
         {/* REVIEW: default option */}
         <option value="dark">Dark</option>
         <option value="colorful">Colorful</option>
@@ -32,6 +36,7 @@ const Form = ({ card, handleDelete, newMaker }) => {
         name="title"
         defaultValue={title}
         placeholder="Title"
+        required
       />
       <input
         className={styles.input}
@@ -39,6 +44,7 @@ const Form = ({ card, handleDelete, newMaker }) => {
         name="email"
         defaultValue={email}
         placeholder="Email"
+        required
       />
 
       <textarea
@@ -46,12 +52,13 @@ const Form = ({ card, handleDelete, newMaker }) => {
         name="message"
         defaultValue={message}
         placeholder="Message"
+        required
       />
 
       <Button content={fileName} />
-      <Button content="Delete" onClick={onDelete} />
+      <Button type="button" content="Delete" onClick={handleDelete} />
     </form>
   );
-};
+});
 
-export default Form;
+export default EditForm;

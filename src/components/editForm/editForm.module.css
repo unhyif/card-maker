@@ -12,9 +12,8 @@
   border: none;
   border-right: 0.1rem solid black;
   border-bottom: 0.1rem solid black;
-  /* flex: 1 1 calc(100% / 3); REVIEW */
-  flex-grow: 1;
-  width: calc(100% / 3);
+  flex: 1 1 calc(100% / 3);
+  min-width: 0;
 }
 
 .textarea {
@@ -38,7 +37,6 @@
 }
 
 .form button {
-  border: none;
   border-right: 0.1rem solid black;
   border-bottom: 0.1rem solid black;
   width: 50%;

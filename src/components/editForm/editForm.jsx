@@ -2,8 +2,16 @@ import { memo } from "react";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
-const EditForm = memo(({ card, deleteCard }) => {
+const EditForm = memo(({ card, editCard, deleteCard }) => {
   const { name, company, theme, title, email, message, fileName } = card;
+
+  const onChange = (e) => {
+    const key = e.target.name;
+    const newCard = { ...card };
+    newCard[key] = e.target.value;
+    editCard(card, newCard);
+  };
+
   const onDelete = () => deleteCard(card);
 
   return (
@@ -14,6 +22,7 @@ const EditForm = memo(({ card, deleteCard }) => {
         defaultValue={name}
         placeholder="Name"
         required
+        onChange={onChange}
       />
       <input
         className={styles.input}
@@ -21,8 +30,14 @@ const EditForm = memo(({ card, deleteCard }) => {
         defaultValue={company}
         placeholder="Company"
         required
+        onChange={onChange}
       />
-      <select className={styles.select} name="theme" defaultValue={theme}>
+      <select
+        className={styles.select}
+        name="theme"
+        defaultValue={theme}
+        onChange={onChange}
+      >
         {/* REVIEW: default option */}
         <option value="dark">Dark</option>
         <option value="colorful">Colorful</option>
@@ -35,6 +50,7 @@ const EditForm = memo(({ card, deleteCard }) => {
         defaultValue={title}
         placeholder="Title"
         required
+        onChange={onChange}
       />
       <input
         className={styles.input}
@@ -43,6 +59,7 @@ const EditForm = memo(({ card, deleteCard }) => {
         defaultValue={email}
         placeholder="Email"
         required
+        onChange={onChange}
       />
 
       <textarea
@@ -51,6 +68,7 @@ const EditForm = memo(({ card, deleteCard }) => {
         defaultValue={message}
         placeholder="Message"
         required
+        onChange={onChange}
       />
 
       <Button type="button" content={fileName} />

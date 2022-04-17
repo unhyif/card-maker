@@ -42,6 +42,14 @@ function App({ authService }) {
     },
   ]); // REVIEW: Home에서 관리하기
 
+  const editCard = useCallback(
+    (oldCard, newCard) =>
+      setCards((cards) =>
+        cards.map((item) => (item === oldCard ? newCard : item))
+      ),
+    []
+  );
+
   const deleteCard = useCallback(
     (card) => setCards((cards) => cards.filter((item) => item !== card)),
     []
@@ -69,7 +77,12 @@ function App({ authService }) {
         <Route
           path="/"
           element={
-            <Home cards={cards} deleteCard={deleteCard} addCard={addCard} />
+            <Home
+              cards={cards}
+              editCard={editCard}
+              deleteCard={deleteCard}
+              addCard={addCard}
+            />
           }
         />
         {/* 마운트 될 때 location 정보 없이 Home이 일단 렌더링 됨 */}

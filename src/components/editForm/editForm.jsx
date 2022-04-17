@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
@@ -12,15 +12,17 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
     updateCard(updatedCard);
   };
 
-  const onImageChange = async (e) => {
-    const imgFile = e.target.files[0];
-    const fileName = imgFile.name.slice(0, imgFile.name.indexOf("."));
-    const fileURL = await imageService.upload(imgFile); // TODO: useCallback
-    const updatedCard = { ...card, fileName, fileURL };
-    updateCard(updatedCard);
+  const onImageChange = async (fileName, file) => {
+    try {
+      const fileURL = await imageService.upload(file);
+      const updatedCard = { ...card, fileName, fileURL };
+      updateCard(updatedCard);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const onDelete = () => deleteCard(card.id);
+  const onDelete = useCallback(() => deleteCard(card.id), []);
 
   return (
     <form className={styles.form}>
@@ -83,7 +85,7 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
         hasImage={true}
         content={fileName}
         id={card.id}
-        onChange={onImageChange}
+        handleFile={onImageChange}
       />
       <Button type="button" content="Delete" onClick={onDelete} />
     </form>

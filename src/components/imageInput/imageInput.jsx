@@ -1,13 +1,21 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import styles from "./imageInput.module.css";
 
-function exit() {}
+function getFileName(file) {
+  return file.name.slice(0, file.name.indexOf("."));
+}
 
-const ImageInput = memo(({ hasImage, content, onChange, id = "new" }) => {
-  const className = hasImage ? "pink" : "gray";
+const ImageInput = memo(({ hasImage, content, handleFile, id = "new" }) => {
+  const onChange = (e) => {
+    const file = e.target.files[0];
+    handleFile(getFileName(file), file);
+  };
+
+  const bg = hasImage ? "pink" : "gray";
+
   return (
     <>
-      <label htmlFor={id} className={`${styles.label} ${styles[className]}`}>
+      <label htmlFor={id} className={`${styles.label} ${styles[bg]}`}>
         {content}
       </label>
       <input

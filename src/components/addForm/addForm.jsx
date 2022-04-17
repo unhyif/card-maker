@@ -1,17 +1,13 @@
-import { memo, useRef, useState } from "react";
+import { memo, useState } from "react";
 import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
 import styles from "./addForm.module.css";
 
-const NO_FILE = "No file";
-
 const AddForm = memo(({ addCard, imageService }) => {
   const [hasImage, setHasImage] = useState(false);
-  const [imageName, setImageName] = useState(NO_FILE);
+  const [imageName, setImageName] = useState(null);
 
-  const onImageSelect = (e) => {
-    const imgFile = e.target.files[0];
-    const fileName = imgFile.name.slice(0, imgFile.name.indexOf("."));
+  const onImageAdd = (fileName) => {
     setHasImage(true);
     setImageName(fileName);
   };
@@ -19,6 +15,7 @@ const AddForm = memo(({ addCard, imageService }) => {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
+
       const data = new FormData(e.target);
       const imgFile = data.get("image");
       const newCard = {
@@ -35,7 +32,7 @@ const AddForm = memo(({ addCard, imageService }) => {
 
       e.target.reset();
       setHasImage(false);
-      setImageName(NO_FILE);
+      setImageName(null);
       addCard(newCard);
     } catch (e) {
       console.error(e);
@@ -85,8 +82,8 @@ const AddForm = memo(({ addCard, imageService }) => {
 
       <ImageInput
         hasImage={hasImage}
-        content={imageName}
-        onChange={onImageSelect}
+        content={imageName || "No file"}
+        handleFile={onImageAdd}
       />
       <Button content="Add" />
     </form>

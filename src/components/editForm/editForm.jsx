@@ -2,15 +2,15 @@ import { memo } from "react";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
-const EditForm = memo(({ id, card, updateCard, deleteCard }) => {
+const EditForm = memo(({ card, updateCard, deleteCard }) => {
   const { name, company, theme, title, email, message, fileName } = card;
 
   const onChange = (e) => {
     const updatedCard = { ...card, [e.target.name]: e.target.value };
-    updateCard(id, updatedCard);
+    updateCard(updatedCard);
   };
 
-  const onDelete = () => deleteCard(id);
+  const onDelete = () => deleteCard(card.id);
 
   return (
     <form className={styles.form}>

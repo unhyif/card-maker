@@ -3,7 +3,7 @@ import Maker from "components/maker/maker";
 import Preview from "components/preview/preview";
 import styles from "./home.module.css";
 
-const Home = ({ cards, updateCard, deleteCard, addCard }) => {
+const Home = ({ cards, addOrUpdateCard, deleteCard }) => {
   const { state } = useLocation(); // location 정보
   const id = state ? state.id : null;
 
@@ -11,9 +11,8 @@ const Home = ({ cards, updateCard, deleteCard, addCard }) => {
     <main className={styles.home}>
       <Maker
         cards={cards}
-        updateCard={updateCard}
+        addOrUpdateCard={addOrUpdateCard}
         deleteCard={deleteCard}
-        addCard={addCard}
       />
       <Preview cards={cards} />
     </main>

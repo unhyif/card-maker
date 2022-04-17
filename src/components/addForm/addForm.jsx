@@ -7,7 +7,8 @@ const AddForm = memo(({ addCard }) => {
     e.preventDefault();
 
     const data = new FormData(e.target);
-    const card = {
+    const newCard = {
+      id: Date.now(),
       name: data.get("name"),
       company: data.get("company"),
       theme: data.get("theme"),
@@ -18,7 +19,7 @@ const AddForm = memo(({ addCard }) => {
       fileURL: null,
     };
     e.target.reset();
-    addCard(card);
+    addCard(newCard);
   };
 
   // const handleDelete = () => card

@@ -8,6 +8,7 @@ import styles from "app.module.css";
 function App({ authService }) {
   const [cards, setCards] = useState({
     1: {
+      id: 1,
       name: "unhyif",
       company: "Facebook",
       theme: "dark",
@@ -18,6 +19,7 @@ function App({ authService }) {
       fileURL: null,
     },
     2: {
+      id: 2,
       name: "unhyif",
       company: "Facebook",
       theme: "colorful",
@@ -28,6 +30,7 @@ function App({ authService }) {
       fileURL: null,
     },
     3: {
+      id: 3,
       name: "unhyif",
       company: "Facebook",
       theme: "light",
@@ -39,9 +42,8 @@ function App({ authService }) {
     },
   }); // REVIEW: Home에서 관리하기
 
-  const updateCard = useCallback(
-    (key, updatedCard) =>
-      setCards((cards) => ({ ...cards, [key]: updatedCard })),
+  const addOrUpdateCard = useCallback(
+    (card) => setCards((cards) => ({ ...cards, [card.id]: card })),
     []
   );
 
@@ -52,11 +54,6 @@ function App({ authService }) {
         delete updatedCards[key];
         return updatedCards;
       }),
-    []
-  );
-
-  const addCard = useCallback(
-    (newCard) => setCards((cards) => ({ ...cards, [Date.now()]: newCard })),
     []
   );
 
@@ -79,9 +76,8 @@ function App({ authService }) {
           element={
             <Home
               cards={cards}
-              updateCard={updateCard}
+              addOrUpdateCard={addOrUpdateCard}
               deleteCard={deleteCard}
-              addCard={addCard}
             />
           }
         />

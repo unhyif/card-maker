@@ -2,24 +2,22 @@ import { memo } from "react";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
-const EditForm = memo(({ card, editCard, deleteCard }) => {
+const EditForm = memo(({ id, card, updateCard, deleteCard }) => {
   const { name, company, theme, title, email, message, fileName } = card;
 
   const onChange = (e) => {
-    const key = e.target.name;
-    const newCard = { ...card };
-    newCard[key] = e.target.value;
-    editCard(card, newCard);
+    const updatedCard = { ...card, [e.target.name]: e.target.value };
+    updateCard(id, updatedCard);
   };
 
-  const onDelete = () => deleteCard(card);
+  const onDelete = () => deleteCard(id);
 
   return (
     <form className={styles.form}>
       <input
         className={styles.input}
         name="name"
-        defaultValue={name}
+        value={name}
         placeholder="Name"
         required
         onChange={onChange}
@@ -27,7 +25,7 @@ const EditForm = memo(({ card, editCard, deleteCard }) => {
       <input
         className={styles.input}
         name="company"
-        defaultValue={company}
+        value={company}
         placeholder="Company"
         required
         onChange={onChange}
@@ -35,7 +33,7 @@ const EditForm = memo(({ card, editCard, deleteCard }) => {
       <select
         className={styles.select}
         name="theme"
-        defaultValue={theme}
+        value={theme}
         onChange={onChange}
       >
         {/* REVIEW: default option */}
@@ -47,7 +45,7 @@ const EditForm = memo(({ card, editCard, deleteCard }) => {
       <input
         className={styles.input}
         name="title"
-        defaultValue={title}
+        value={title}
         placeholder="Title"
         required
         onChange={onChange}
@@ -56,7 +54,7 @@ const EditForm = memo(({ card, editCard, deleteCard }) => {
         className={styles.input}
         type="email"
         name="email"
-        defaultValue={email}
+        value={email}
         placeholder="Email"
         required
         onChange={onChange}
@@ -65,7 +63,7 @@ const EditForm = memo(({ card, editCard, deleteCard }) => {
       <textarea
         className={styles.textarea}
         name="message"
-        defaultValue={message}
+        value={message}
         placeholder="Message"
         required
         onChange={onChange}

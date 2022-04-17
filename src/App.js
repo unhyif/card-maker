@@ -6,9 +6,8 @@ import Login from "components/login/login";
 import styles from "app.module.css";
 
 function App({ authService }) {
-  const [cards, setCards] = useState([
-    {
-      id: 1,
+  const [cards, setCards] = useState({
+    1: {
       name: "unhyif",
       company: "Facebook",
       theme: "dark",
@@ -18,8 +17,7 @@ function App({ authService }) {
       fileName: "Image",
       fileURL: null,
     },
-    {
-      id: 2,
+    2: {
       name: "unhyif",
       company: "Facebook",
       theme: "colorful",
@@ -29,8 +27,7 @@ function App({ authService }) {
       fileName: "Image",
       fileURL: null,
     },
-    {
-      id: 3,
+    3: {
       name: "unhyif",
       company: "Facebook",
       theme: "light",
@@ -40,23 +37,26 @@ function App({ authService }) {
       fileName: "Image",
       fileURL: null,
     },
-  ]); // REVIEW: Home에서 관리하기
+  }); // REVIEW: Home에서 관리하기
 
-  const editCard = useCallback(
-    (oldCard, newCard) =>
-      setCards((cards) =>
-        cards.map((item) => (item === oldCard ? newCard : item))
-      ),
+  const updateCard = useCallback(
+    (key, updatedCard) =>
+      setCards((cards) => ({ ...cards, [key]: updatedCard })),
     []
   );
 
   const deleteCard = useCallback(
-    (card) => setCards((cards) => cards.filter((item) => item !== card)),
+    (key) =>
+      setCards((cards) => {
+        const updatedCards = { ...cards };
+        delete updatedCards[key];
+        return updatedCards;
+      }),
     []
   );
 
   const addCard = useCallback(
-    (card) => setCards((cards) => [...cards, card]),
+    (newCard) => setCards((cards) => ({ ...cards, [Date.now()]: newCard })),
     []
   );
 
@@ -79,7 +79,7 @@ function App({ authService }) {
           element={
             <Home
               cards={cards}
-              editCard={editCard}
+              updateCard={updateCard}
               deleteCard={deleteCard}
               addCard={addCard}
             />

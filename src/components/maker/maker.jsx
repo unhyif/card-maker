@@ -2,15 +2,16 @@ import EditForm from "components/editForm/editForm";
 import AddForm from "components/addForm/addForm";
 import styles from "./maker.module.css";
 
-const Maker = ({ cards, editCard, deleteCard, addCard }) => (
+const Maker = ({ cards, updateCard, deleteCard, addCard }) => (
   <section className={styles.maker}>
     <h2 className={styles.title}>Card maker</h2>
     <section className={styles.forms}>
-      {cards.map((card) => (
+      {Object.keys(cards).map((key) => (
         <EditForm
-          key={card.id}
-          card={card}
-          editCard={editCard}
+          key={key}
+          id={key}
+          card={cards[key]}
+          updateCard={updateCard}
           deleteCard={deleteCard}
         />
       ))}

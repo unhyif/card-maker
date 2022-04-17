@@ -8,7 +8,6 @@ const AddForm = memo(({ addCard }) => {
 
     const data = new FormData(e.target);
     const card = {
-      id: Date.now(),
       name: data.get("name"),
       company: data.get("company"),
       theme: data.get("theme"),

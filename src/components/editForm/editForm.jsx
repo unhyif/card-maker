@@ -1,13 +1,22 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
-const EditForm = memo(({ card, updateCard, deleteCard }) => {
+const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
+  const [uploading, setUploading] = useState(false);
   const { name, company, theme, title, email, message, fileName } = card;
 
-  const onChange = (e) => {
+  const onTextChange = (e) => {
     const updatedCard = { ...card, [e.target.name]: e.target.value };
+    updateCard(updatedCard);
+  };
+
+  const onImageChange = async (e) => {
+    const imgFile = e.target.files[0];
+    const fileName = imgFile.name.slice(0, imgFile.name.indexOf("."));
+    const fileURL = await imageService.upload(imgFile); // TODO: useCallback
+    const updatedCard = { ...card, fileName, fileURL };
     updateCard(updatedCard);
   };
 
@@ -21,7 +30,7 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         value={name}
         placeholder="Name"
         required
-        onChange={onChange}
+        onChange={onTextChange}
       />
       <input
         className={styles.input}
@@ -29,13 +38,13 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         value={company}
         placeholder="Company"
         required
-        onChange={onChange}
+        onChange={onTextChange}
       />
       <select
         className={styles.select}
         name="theme"
         value={theme}
-        onChange={onChange}
+        onChange={onTextChange}
       >
         {/* REVIEW: default option */}
         <option value="dark">Dark</option>
@@ -49,7 +58,7 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         value={title}
         placeholder="Title"
         required
-        onChange={onChange}
+        onChange={onTextChange}
       />
       <input
         className={styles.input}
@@ -58,7 +67,7 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         value={email}
         placeholder="Email"
         required
-        onChange={onChange}
+        onChange={onTextChange}
       />
 
       <textarea
@@ -67,10 +76,15 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         value={message}
         placeholder="Message"
         required
-        onChange={onChange}
+        onChange={onTextChange}
       />
 
-      <ImageInput use="update" content={fileName} id={card.id} />
+      <ImageInput
+        hasImage={true}
+        content={fileName}
+        id={card.id}
+        onChange={onImageChange}
+      />
       <Button type="button" content="Delete" onClick={onDelete} />
     </form>
   );

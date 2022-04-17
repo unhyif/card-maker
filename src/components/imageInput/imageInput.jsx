@@ -1,7 +1,10 @@
+import { memo } from "react";
 import styles from "./imageInput.module.css";
 
-const ImageInput = ({ use, content, onClick, id = "new" }) => {
-  const className = use === "add" ? "gray" : "pink";
+function exit() {}
+
+const ImageInput = memo(({ hasImage, content, onChange, id = "new" }) => {
+  const className = hasImage ? "pink" : "gray";
   return (
     <>
       <label htmlFor={id} className={`${styles.label} ${styles[className]}`}>
@@ -12,11 +15,11 @@ const ImageInput = ({ use, content, onClick, id = "new" }) => {
         className={styles.input}
         type="file"
         name="image"
-        onClick={onClick}
+        onChange={onChange}
         required
       />
     </>
   );
-};
+});
 
 export default ImageInput;

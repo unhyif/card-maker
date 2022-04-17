@@ -35,18 +35,3 @@
 .textarea:focus {
   background: makerLightPink;
 }
-
-.form button {
-  border-right: 0.1rem solid black;
-  border-bottom: 0.1rem solid black;
-  width: 50%;
-}
-
-.form button:first-of-type {
-  background: pink;
-}
-
-.form button:last-of-type {
-  background: makerGreen;
-  color: white;
-}

@@ -3,7 +3,7 @@ import Maker from "components/maker/maker";
 import Preview from "components/preview/preview";
 import styles from "./home.module.css";
 
-const Home = ({ cards, addOrUpdateCard, deleteCard }) => {
+const Home = ({ cards, addOrUpdateCard, deleteCard, imageService }) => {
   const { state } = useLocation(); // location 정보
   const id = state ? state.id : null;
 
@@ -13,6 +13,7 @@ const Home = ({ cards, addOrUpdateCard, deleteCard }) => {
         cards={cards}
         addOrUpdateCard={addOrUpdateCard}
         deleteCard={deleteCard}
+        imageService={imageService}
       />
       <Preview cards={cards} />
     </main>

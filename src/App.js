@@ -5,7 +5,7 @@ import Home from "pages/home/home";
 import Login from "components/login/login";
 import styles from "app.module.css";
 
-function App({ authService }) {
+function App({ authService, imageService }) {
   const [cards, setCards] = useState({
     1: {
       id: 1,
@@ -78,6 +78,7 @@ function App({ authService }) {
               cards={cards}
               addOrUpdateCard={addOrUpdateCard}
               deleteCard={deleteCard}
+              imageService={imageService}
             />
           }
         />

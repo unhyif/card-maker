@@ -1,0 +1,21 @@
+.label {
+  padding: 0.5em;
+  font-weight: bold;
+  border-right: 0.1rem solid black;
+  border-bottom: 0.1rem solid black;
+  width: 50%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.gray {
+  background: lightgray;
+}
+
+.pink {
+  background: pink;
+}
+
+.input {
+  display: none;
+}

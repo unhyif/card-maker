@@ -1,4 +1,5 @@
 import { memo } from "react";
+import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
 import styles from "./editForm.module.css";
 
@@ -69,7 +70,7 @@ const EditForm = memo(({ card, updateCard, deleteCard }) => {
         onChange={onChange}
       />
 
-      <Button type="button" content={fileName} />
+      <ImageInput use="update" content={fileName} id={card.id} />
       <Button type="button" content="Delete" onClick={onDelete} />
     </form>
   );

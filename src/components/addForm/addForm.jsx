@@ -1,31 +1,40 @@
-import { memo } from "react";
+import { memo, useRef } from "react";
+import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
 import styles from "./addForm.module.css";
 
-const AddForm = memo(({ addCard }) => {
-  const onSubmit = (e) => {
-    e.preventDefault();
+const AddForm = memo(({ addCard, imageService }) => {
+  const onSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const imgFile = data.get("image");
 
-    const data = new FormData(e.target);
-    const newCard = {
-      id: Date.now(),
-      name: data.get("name"),
-      company: data.get("company"),
-      theme: data.get("theme"),
-      title: data.get("title"),
-      email: data.get("email"),
-      message: data.get("message"),
-      fileName: null,
-      fileURL: null,
-    };
-    e.target.reset();
-    addCard(newCard);
+      const newCard = {
+        id: Date.now(),
+        name: data.get("name"),
+        company: data.get("company"),
+        theme: data.get("theme"),
+        title: data.get("title"),
+        email: data.get("email"),
+        message: data.get("message"),
+        fileName: imgFile.name.slice(0, imgFile.name.indexOf(".")),
+        fileURL: await imageService.upload(imgFile),
+      };
+      e.target.reset();
+      addCard(newCard);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  // const handleDelete = () => card
-
   return (
-    <form action="post" className={styles.form} onSubmit={onSubmit}>
+    <form
+      action="post"
+      encType="multipart/form-data"
+      className={styles.form}
+      onSubmit={onSubmit}
+    >
       <input className={styles.input} name="name" placeholder="Name" required />
       <input
         className={styles.input}
@@ -60,7 +69,7 @@ const AddForm = memo(({ addCard }) => {
         required
       />
 
-      <Button type="button" content="No file" />
+      <ImageInput use="add" content="No file" />
       <Button content="Add" />
     </form>
   );

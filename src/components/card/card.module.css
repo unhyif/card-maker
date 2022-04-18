@@ -8,7 +8,7 @@
   border-radius: 1em;
   padding: 1.5em;
   box-shadow: 0.7rem 0.7rem 1rem makerShadow;
-  width: 80%;
+  width: 70%;
 }
 
 .card.dark {
@@ -26,8 +26,9 @@
 
 .avatar {
   width: 7em;
+  height: 7em;
   border-radius: 50%;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
 .info {

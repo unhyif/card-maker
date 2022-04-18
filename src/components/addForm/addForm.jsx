@@ -4,35 +4,33 @@ import Button from "components/button/button";
 import styles from "./addForm.module.css";
 
 const AddForm = memo(({ addCard, imageService }) => {
-  const [hasImage, setHasImage] = useState(false);
-  const [imageName, setImageName] = useState(null);
+  const [file, setFile] = useState(null);
 
-  const onImageAdd = (fileName) => {
-    setHasImage(true);
-    setImageName(fileName);
+  const onImageAdd = (file) => {
+    setFile(file);
   };
 
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
+      const formData = new FormData(e.target);
 
-      const data = new FormData(e.target);
-      const imgFile = data.get("image");
+      const imgFile = formData.get("image");
+      const data = await imageService.upload(imgFile);
       const newCard = {
         id: Date.now(),
-        name: data.get("name"),
-        company: data.get("company"),
-        theme: data.get("theme"),
-        title: data.get("title"),
-        email: data.get("email"),
-        message: data.get("message"),
-        fileName: imgFile.name.slice(0, imgFile.name.indexOf(".")),
-        fileURL: await imageService.upload(imgFile),
+        name: formData.get("name"),
+        company: formData.get("company"),
+        theme: formData.get("theme"),
+        title: formData.get("title"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+        fileName: data.original_filename,
+        fileURL: data.secure_url,
       };
 
       e.target.reset();
-      setHasImage(false);
-      setImageName(null);
+      setFile(null);
       addCard(newCard);
     } catch (e) {
       console.error(e);
@@ -81,8 +79,8 @@ const AddForm = memo(({ addCard, imageService }) => {
       />
 
       <ImageInput
-        hasImage={hasImage}
-        content={imageName || "No file"}
+        hasImage={file && true}
+        content={file ? file.name.slice(0, file.name.indexOf(".")) : "No file"}
         handleFile={onImageAdd}
       />
       <Button content="Add" />

@@ -5,7 +5,7 @@ import Footer from "components/footer/footer";
 // import styles from "./layout.module.css";
 
 const Layout = memo(({ authService }) => {
-  const onLogout = async () => {
+  const logout = async () => {
     try {
       const result = await authService.logout();
     } catch (e) {
@@ -15,7 +15,7 @@ const Layout = memo(({ authService }) => {
 
   return (
     <>
-      <Header logout={onLogout} size="big" />
+      <Header onLogout={logout} size="big" />
       <Outlet />
       <Footer />
     </>

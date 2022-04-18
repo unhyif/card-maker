@@ -14,7 +14,6 @@ export class ImageService {
       body: formData,
     })
       .then((res) => res.json())
-      .then((data) => data.url)
       .catch((e) => {
         throw e;
       });

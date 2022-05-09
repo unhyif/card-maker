@@ -1,16 +1,7 @@
 import { memo, useState } from "react";
 import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
-import { spinner } from "icons/spinner";
 import styles from "./addForm.module.css";
-
-function getContent(file, loading) {
-  let content = file ? file.name.slice(0, file.name.indexOf(".")) : "No file";
-  if (loading) {
-    content = spinner;
-  }
-  return content;
-}
 
 const AddForm = memo(({ addCard, imageService }) => {
   const [file, setFile] = useState(null);
@@ -93,7 +84,8 @@ const AddForm = memo(({ addCard, imageService }) => {
 
       <ImageInput
         hasImage={file && true}
-        content={getContent(file, loading)}
+        content={file ? file.name.slice(0, file.name.indexOf(".")) : "No file"}
+        isLoading={loading}
         handleFile={onImageAdd}
       />
       <Button content="Add" />

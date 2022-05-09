@@ -1,33 +1,36 @@
-import { memo, useEffect, useRef } from "react";
+import { memo } from "react";
+import { spinner } from "icons/spinner";
 import styles from "./imageInput.module.css";
 
-const ImageInput = memo(({ hasImage, content, handleFile, id = "new" }) => {
-  const onChange = (e) => handleFile(e.target.files[0]);
-  const bg = hasImage ? "pink" : "gray";
-  const labelRef = useRef();
-  useEffect(() => {
-    labelRef.current.innerHTML = content;
-  }, [content]);
+const ImageInput = memo(
+  ({ hasImage, content, isLoading, handleFile, id = "new" }) => {
+    const onChange = (e) => handleFile(e.target.files[0]);
+    const bg = hasImage ? "pink" : "gray";
 
-  return (
-    <>
-      {/* TODO: trick */}
-      <label
-        ref={labelRef}
-        htmlFor={id}
-        className={`${styles.label} ${styles[bg]}`}
-      ></label>
-      <input
-        type="file"
-        accept="image/*"
-        id={id}
-        className={styles.input}
-        name="image"
-        onChange={onChange}
-        required
-      />
-    </>
-  );
-});
+    return (
+      <>
+        {isLoading && (
+          <div className={`${styles.loading} ${styles[bg]}`}>{spinner}</div>
+        )}
+
+        {/* TODO: trick */}
+        {!isLoading && (
+          <label htmlFor={id} className={`${styles.label} ${styles[bg]}`}>
+            {content}
+          </label>
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          id={id}
+          className={styles.input}
+          name="image"
+          onChange={onChange}
+          required
+        />
+      </>
+    );
+  }
+);
 
 export default ImageInput;

@@ -1,10 +1,11 @@
 import { memo, useCallback, useState } from "react";
 import ImageInput from "components/imageInput/imageInput";
 import Button from "components/button/button";
+import { spinner } from "icons/spinner";
 import styles from "./editForm.module.css";
 
 const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
-  const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { name, company, theme, title, email, message, fileName } = card;
 
   const onTextChange = (e) => {
@@ -13,6 +14,7 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
   };
 
   const onImageChange = async (file) => {
+    setLoading(true);
     try {
       const { original_filename: fileName, secure_url: fileURL } =
         await imageService.upload(file);
@@ -25,6 +27,7 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
     } catch (e) {
       console.error(e);
     }
+    setLoading(false);
   };
 
   const onDelete = useCallback(() => deleteCard(card.id), []);
@@ -88,7 +91,7 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
 
       <ImageInput
         hasImage={true}
-        content={fileName}
+        content={!loading ? fileName : spinner}
         id={card.id}
         handleFile={onImageChange}
       />

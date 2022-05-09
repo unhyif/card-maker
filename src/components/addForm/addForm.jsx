@@ -49,42 +49,29 @@ const AddForm = memo(({ addCard, imageService }) => {
       onSubmit={onSubmit}
     >
       <input className={styles.input} name="name" placeholder="Name" required />
-      <input
-        className={styles.input}
-        name="company"
-        placeholder="Company"
-        required
-      />
+      <input className={styles.input} name="company" placeholder="Company" />
       <select className={styles.select} name="theme">
         <option value="dark">Dark</option>
         <option value="colorful">Colorful</option>
         <option value="light">Light</option>
       </select>
 
-      <input
-        className={styles.input}
-        name="title"
-        placeholder="Title"
-        required
-      />
+      <input className={styles.input} name="title" placeholder="Title" />
       <input
         className={styles.input}
         type="email"
         name="email"
         placeholder="Email"
-        required
       />
 
       <textarea
         className={styles.textarea}
         name="message"
         placeholder="Message"
-        required
       />
 
       <ImageInput
-        hasImage={file && true}
-        content={file ? file.name.slice(0, file.name.indexOf(".")) : "No file"}
+        content={file && file.name.slice(0, file.name.indexOf("."))}
         isLoading={loading}
         handleFile={onImageAdd}
       />

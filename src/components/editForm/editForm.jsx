@@ -46,7 +46,6 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
         name="company"
         value={company}
         placeholder="Company"
-        required
         onChange={onTextChange}
       />
       <select
@@ -66,7 +65,6 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
         name="title"
         value={title}
         placeholder="Title"
-        required
         onChange={onTextChange}
       />
       <input
@@ -75,7 +73,6 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
         name="email"
         value={email}
         placeholder="Email"
-        required
         onChange={onTextChange}
       />
 
@@ -84,12 +81,10 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
         name="message"
         value={message}
         placeholder="Message"
-        required
         onChange={onTextChange}
       />
 
       <ImageInput
-        hasImage={true}
         content={fileName}
         isLoading={loading}
         id={card.id}

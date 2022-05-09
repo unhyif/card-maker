@@ -8,6 +8,18 @@
   text-align: center;
 }
 
+.label svg {
+  fill: white;
+  width: 1em;
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 .gray {
   background: lightgray;
 }

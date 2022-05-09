@@ -14,11 +14,12 @@ const EditForm = memo(({ card, updateCard, deleteCard, imageService }) => {
 
   const onImageChange = async (file) => {
     try {
-      const data = await imageService.upload(file);
+      const { original_filename: fileName, secure_url: fileURL } =
+        await imageService.upload(file);
       const updatedCard = {
         ...card,
-        fileName: data.original_filename,
-        fileURL: data.secure_url,
+        fileName,
+        fileURL,
       };
       updateCard(updatedCard);
     } catch (e) {

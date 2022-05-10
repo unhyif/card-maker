@@ -13,10 +13,10 @@ const ImageInput = memo(({ content, isLoading, handleFile, id = "new" }) => {
         <div className={`${styles.loading} ${styles[bg]}`}>{spinner}</div>
       )}
 
-      {/* TODO: trick */}
+      {/* TODO: trick, delete image */}
       {!isLoading && (
         <label htmlFor={id} className={`${styles.label} ${styles[bg]}`}>
-          {content || "No file"}
+          {content || "No Image"}
         </label>
       )}
       <input

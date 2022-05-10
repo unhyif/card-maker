@@ -12,12 +12,12 @@ const AddForm = memo(({ addCard, imageService }) => {
   };
 
   const onSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const formData = new FormData(e.target);
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const imgFile = formData.get("image");
+    let fileName, fileURL;
 
-      const imgFile = formData.get("image");
-      let fileName, fileURL;
+    try {
       if (imgFile.size) {
         setLoading(true);
         const { original_filename, secure_url } = await imageService.upload(
@@ -41,14 +41,13 @@ const AddForm = memo(({ addCard, imageService }) => {
         fileName,
         fileURL,
       };
-
-      e.target.reset();
-      setFile(null);
-      imgFile.size && setLoading(false);
       addCard(newCard);
     } catch (e) {
       console.error(e);
     }
+    setFile(null);
+    imgFile.size && setLoading(false);
+    e.target.reset();
   };
 
   return (

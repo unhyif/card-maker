@@ -2,6 +2,7 @@
 
 .home {
   flex-grow: 1;
+  min-height: 0; /* REVIEW */
   display: flex;
   padding-top: 8.5rem; /* TODO */
   background: white;
@@ -9,6 +10,7 @@
 
 @media screen and (max-width: mediaQuery) {
   .home {
+    min-height: auto;
     flex-direction: column;
   }
 }

@@ -1,5 +1,4 @@
 @value makerGreen from "../../common/colors.css";
-@value mediaQuery from "../../common/size.css";
 
 .preview {
   flex-basis: 50%;
@@ -17,10 +16,4 @@
   flex-direction: column;
   align-items: center;
   gap: 1em;
-}
-
-@media screen and (max-width: mediaQuery) {
-  .preview {
-    padding-top: 2em;
-  }
 }

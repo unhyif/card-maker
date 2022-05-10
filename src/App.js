@@ -25,7 +25,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
           .load(uid)
           .then((cards) => setCards(cards))
           .catch((e) => console.error(e));
-        updateCount.current += 1;
+        updateCount.current = 1;
       } else {
         navigate("/login");
         // user || navigate("/login")

@@ -6,9 +6,9 @@
   gap: 1em;
   color: white;
   border-radius: 1em;
-  padding: 1.5em;
+  padding: 2em 1.5em;
   box-shadow: 0.7rem 0.7rem 1rem makerShadow;
-  width: 70%;
+  width: 75%;
 }
 
 .card.dark {

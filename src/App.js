@@ -8,7 +8,7 @@ import styles from "app.module.css";
 function App({ authService, dbService, AddCardForm, EditCardForm }) {
   const [cards, setCards] = useState({}); // REVIEW: Home에서 관리하기
   const id = useRef(null);
-  const firstUpdating = useRef(false);
+  const updateCount = useRef(0);
 
   // console.log(window.location.href); // REVIEW: navigate 할 때마다 App 실행됨 but state는 초기화되지 않음
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
           .load(uid)
           .then((cards) => setCards(cards))
           .catch((e) => console.error(e));
-        firstUpdating.current = true;
+        updateCount.current += 1;
       } else {
         navigate("/login");
         // user || navigate("/login")
@@ -36,13 +36,13 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
 
   // When a card was added or edited
   useEffect(() => {
-    id.current && !firstUpdating.current && dbService.update(id.current, cards);
+    updateCount.current > 1 && dbService.update(id.current, cards);
     return undefined;
-  }, [id.current, firstUpdating.current, cards]);
+  }, [cards]);
 
   const addOrUpdateCard = useCallback((card) => {
     setCards((cards) => ({ ...cards, [card.id]: card }));
-    firstUpdating.current = firstUpdating.current && false;
+    updateCount.current += 1;
   }, []);
 
   const deleteCard = useCallback((key) => {
@@ -51,7 +51,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
       delete updatedCards[key];
       return updatedCards;
     });
-    firstUpdating.current = firstUpdating.current && false;
+    updateCount.current += 1;
   }, []);
 
   return (

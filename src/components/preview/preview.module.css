@@ -18,3 +18,9 @@
   align-items: center;
   gap: 1em;
 }
+
+@media screen and (max-width: mediaQuery) {
+  .preview {
+    padding-top: 2em;
+  }
+}

@@ -16,10 +16,20 @@ const AddForm = memo(({ addCard, imageService }) => {
       e.preventDefault();
       const formData = new FormData(e.target);
 
-      setLoading(true);
       const imgFile = formData.get("image");
-      const { original_filename: fileName, secure_url: fileURL } =
-        await imageService.upload(imgFile);
+      let fileName, fileURL;
+      if (imgFile.size) {
+        setLoading(true);
+        const { original_filename, secure_url } = await imageService.upload(
+          imgFile
+        );
+        fileName = original_filename;
+        fileURL = secure_url;
+      } else {
+        fileName = null;
+        fileURL = null;
+      }
+
       const newCard = {
         id: Date.now(),
         name: formData.get("name"),
@@ -34,7 +44,7 @@ const AddForm = memo(({ addCard, imageService }) => {
 
       e.target.reset();
       setFile(null);
-      setLoading(false);
+      imgFile.size && setLoading(false);
       addCard(newCard);
     } catch (e) {
       console.error(e);

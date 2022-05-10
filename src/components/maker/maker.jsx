@@ -8,7 +8,7 @@ const Maker = ({
   EditCardForm,
 }) => (
   <section className={styles.maker}>
-    <h2 className={styles.title}>Card maker</h2>
+    <h2 className={styles.title}>Card Maker</h2>
     <section className={styles.forms}>
       {Object.keys(cards).map((key) => (
         <EditCardForm

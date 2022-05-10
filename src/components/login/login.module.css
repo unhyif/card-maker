@@ -4,7 +4,6 @@
 .wrapper {
   width: 48rem;
   position: relative;
-  z-index: 2;
   background: white;
 }
 

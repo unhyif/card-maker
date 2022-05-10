@@ -75,9 +75,9 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
       <Route
         path="/login"
         element={
-          <div className={styles.background}>
+          <main className={styles['login-main']}>
             <Login authService={authService} />
-          </div>
+          </main>
         }
       />
     </Routes>

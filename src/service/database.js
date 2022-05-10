@@ -1,4 +1,3 @@
-import { firebase } from "./firebase";
 import { getDatabase, ref, child, get, set } from "firebase/database";
 
 export class DBService {

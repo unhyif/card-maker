@@ -33,14 +33,12 @@ html {
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 1.6rem;
-  padding: 0 10%;
   background: gray;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
-  min-height: 100vh;
-  background: white;
+  height: 100vh;
+  padding: 0 10%;
 }

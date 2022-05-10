@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { firebase } from "service/firebase";
 import { AuthService } from "service/authentication";
 import { DBService } from "service/database";
 import { ImageService } from "service/image_uploader";

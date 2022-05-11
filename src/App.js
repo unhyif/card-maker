@@ -13,7 +13,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
   const navigate = useNavigate();
   // ComponentDidMount
   useEffect(() => {
-    authService.onAuthChange((user) => {
+    authService.observeUserChange((user) => {
       if (user) {
         id.current = user.uid;
         navigate("/");
@@ -46,9 +46,17 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
     dbService.delete(id.current, key);
   }, []);
 
+  const resetApp = useCallback(
+    () =>
+      window.confirm("Are you sure to reset the app?") &&
+      dbService.reset(id.current, () => setCards({})),
+    [id.current]
+  );
+
   return (
     <Routes>
-      <Route element={<Layout authService={authService} />}>
+      {/* TODO: 로그인 화면에서도 사용하기 */}
+      <Route element={<Layout authService={authService} resetApp={resetApp} />}>
         <Route
           path="/"
           element={

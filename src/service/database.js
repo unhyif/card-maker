@@ -19,4 +19,9 @@ export class DBService {
 
   delete = async (id, key) =>
     remove(ref(this.db, `${id}/cards/${key}`)).catch((e) => console.error(e));
+
+  reset = async (id, onReset) =>
+    remove(ref(this.db, `${id}`))
+      .then(() => onReset())
+      .catch((e) => console.error(e));
 }

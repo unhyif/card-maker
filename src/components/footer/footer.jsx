@@ -3,7 +3,7 @@ import styles from "./footer.module.css";
 
 const Footer = memo(() => (
   <footer>
-    <p>Code your dream</p>
+    <p>Be gritty</p>
   </footer>
 ));
 

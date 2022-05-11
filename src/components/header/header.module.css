@@ -33,17 +33,23 @@ header {
   width: 3em;
 }
 
-.logout {
+.btns {
   position: absolute;
   right: 1em;
   top: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.reset,
+.logout {
   padding: 0.5em 1em;
   border: 0.2rem solid white;
   border-radius: 1rem;
   transition: all 0.1s ease-in-out;
 }
 
-.logout:hover {
+.btns button:hover {
   background: white;
   color: makerGreen;
 }
@@ -51,14 +57,16 @@ header {
 @media screen and (max-width: mediaQuery) {
   .big {
     gap: 0.5em;
+    padding: 3em 0 2em 0;
   }
 
   .big .title {
     font-size: 2.4rem;
   }
 
+  .reset,
   .logout {
-    font-size: 1.2rem;
+    font-size: 1rem;
     right: 1em;
     top: 1em;
   }

@@ -17,10 +17,10 @@ export class AuthService {
   }
 
   login = async (providerName) =>
-    signInWithPopup(this.auth, this[`${providerName}Provider`]);
+    signInWithPopup(this.auth, this[`${providerName}Provider`]); // TODO: switch 함수로 provider 얻기
 
   logout = async () => signOut(this.auth).catch((e) => console.error(e));
 
-  onAuthChange = (navigationCallback) =>
-    onAuthStateChanged(this.auth, (user) => navigationCallback(user));
+  observeUserChange = (onUserChange) =>
+    onAuthStateChanged(this.auth, (user) => onUserChange(user));
 }

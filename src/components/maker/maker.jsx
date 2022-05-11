@@ -10,6 +10,7 @@ const Maker = ({
   <section className={styles.maker}>
     <h2 className={styles.title}>Card Maker</h2>
     <section className={styles.forms}>
+      <AddCardForm addCard={addOrUpdateCard} />
       {Object.keys(cards).map((key) => (
         <EditCardForm
           key={key}
@@ -18,7 +19,6 @@ const Maker = ({
           deleteCard={deleteCard}
         />
       ))}
-      <AddCardForm addCard={addOrUpdateCard} />
     </section>
   </section>
 );

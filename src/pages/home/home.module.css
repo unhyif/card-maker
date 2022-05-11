@@ -10,6 +10,7 @@
 
 @media screen and (max-width: mediaQuery) {
   .home {
+    padding-top: 11.4rem;
     min-height: auto;
     flex-direction: column;
   }

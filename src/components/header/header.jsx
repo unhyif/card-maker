@@ -1,16 +1,18 @@
 import { memo } from "react";
 import styles from "./header.module.css";
 
-const Header = memo(({ onLogout, size }) => (
+const Header = memo(({ onLogout, onReset, size }) => (
   <header className={styles[size]}>
-    {
-      onLogout && (
+    {onLogout && (
+      <div className={styles.btns}>
+        <button className={styles.reset} onClick={onReset}>
+          Reset
+        </button>
         <button className={styles.logout} onClick={onLogout}>
           Logout
         </button>
-      )
-      /* TODO: 초기화 */
-    }
+      </div>
+    )}
     <img src="/images/logo.png" alt="logo" className={styles.logo} />
     <h1 className={styles.title}>Business Card Maker</h1>
   </header>

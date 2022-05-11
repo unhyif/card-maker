@@ -19,7 +19,7 @@ export class AuthService {
   login = async (providerName) =>
     signInWithPopup(this.auth, this[`${providerName}Provider`]);
 
-  logout = async () => signOut(this.auth);
+  logout = async () => signOut(this.auth).catch((e) => console.error(e));
 
   onAuthChange = (navigationCallback) =>
     onAuthStateChanged(this.auth, (user) => navigationCallback(user));

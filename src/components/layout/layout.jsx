@@ -4,13 +4,7 @@ import Header from "components/header/header";
 import Footer from "components/footer/footer";
 
 const Layout = memo(({ authService }) => {
-  const logout = async () => {
-    try {
-      const result = await authService.logout();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const logout = () => authService.logout();
 
   return (
     <>

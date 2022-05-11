@@ -1,19 +1,22 @@
-import { getDatabase, ref, child, get, set } from "firebase/database";
+import { getDatabase, ref, child, get, set, remove } from "firebase/database";
 
 export class DBService {
   constructor() {
     this.db = getDatabase();
   }
 
-  load = async (id) =>
-    get(child(ref(this.db), "cards/" + id))
+  load = async (id, onLoad) =>
+    get(child(ref(this.db), `${id}/cards`))
       .then((snapshot) => (snapshot.exists() ? snapshot.val() : {}))
-      .catch((e) => {
-        throw e;
-      });
+      .then((cards) => onLoad(cards))
+      .catch((e) => console.error(e));
+  // TODO: use listener, off method
 
-  update = async (id, cards) =>
-    set(ref(this.db, "cards/" + id), cards).catch((e) => {
-      throw e;
-    });
+  save = async (id, card) =>
+    set(ref(this.db, `${id}/cards/${card.id}`), card).catch((e) =>
+      console.error(e)
+    );
+
+  delete = async (id, key) =>
+    remove(ref(this.db, `${id}/cards/${key}`)).catch((e) => console.error(e));
 }

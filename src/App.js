@@ -6,43 +6,35 @@ import Login from "components/login/login";
 import styles from "app.module.css";
 
 function App({ authService, dbService, AddCardForm, EditCardForm }) {
-  const [cards, setCards] = useState({}); // REVIEW: Home에서 관리하기
+  const [cards, setCards] = useState({}); // TODO: Home에서 관리하기
   const id = useRef(null);
-  const updateCount = useRef(0);
 
   // console.log(window.location.href); // REVIEW: navigate 할 때마다 App 실행됨 but state는 초기화되지 않음
   const navigate = useNavigate();
   // ComponentDidMount
   useEffect(() => {
     authService.onAuthChange((user) => {
-      // TODO: 로그인 된 상태에서 새로고침 했을 때 navigate 안 쓰고 location 정보 갖는 방법?
       if (user) {
-        const uid = user.uid;
-        id.current = uid;
-        navigate("/", { state: { id: uid } });
-
-        dbService
-          .load(uid)
-          .then((cards) => setCards(cards))
-          .catch((e) => console.error(e));
-        updateCount.current = 1;
+        id.current = user.uid;
+        navigate("/");
+        // navigate("/", { state: { id: uid } });
       } else {
+        setCards({});
         navigate("/login");
-        // user || navigate("/login")
       }
     });
   }, []);
   // REVIEW: 글로벌하게 감시함
 
-  // When a card was added or edited
   useEffect(() => {
-    updateCount.current > 1 && dbService.update(id.current, cards);
-    return undefined;
-  }, [cards]);
+    if (id.current) {
+      dbService.load(id.current, setCards);
+    }
+  }, [id.current]);
 
   const addOrUpdateCard = useCallback((card) => {
     setCards((cards) => ({ ...cards, [card.id]: card }));
-    updateCount.current += 1;
+    dbService.save(id.current, card);
   }, []);
 
   const deleteCard = useCallback((key) => {
@@ -51,7 +43,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
       delete updatedCards[key];
       return updatedCards;
     });
-    updateCount.current += 1;
+    dbService.delete(id.current, key);
   }, []);
 
   return (
@@ -75,7 +67,7 @@ function App({ authService, dbService, AddCardForm, EditCardForm }) {
       <Route
         path="/login"
         element={
-          <main className={styles['login-main']}>
+          <main className={styles["login-main"]}>
             <Login authService={authService} />
           </main>
         }

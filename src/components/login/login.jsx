@@ -5,14 +5,11 @@ import styles from "./login.module.css";
 
 const Login = memo(({ authService }) => {
   const errorRef = useRef();
-  const onLogin = async (providerName) => {
-    try {
-      const result = await authService.login(providerName); // REVIEW: 에러가 변수에 담겨야 catch 됨
-    } catch (e) {
+  const onLogin = (providerName) =>
+    authService.login(providerName).catch((e) => {
       errorRef.current.innerText = e.message;
       errorRef.current.style.display = "block";
-    }
-  };
+    }); // REVIEW: 에러가 변수에 담겨야 catch 됨
 
   return (
     <div className={styles.wrapper}>

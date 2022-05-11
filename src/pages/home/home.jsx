@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import Maker from "components/maker/maker";
 import Preview from "components/preview/preview";
 import styles from "./home.module.css";
@@ -10,8 +9,8 @@ const Home = ({
   AddCardForm,
   EditCardForm,
 }) => {
-  const { state } = useLocation(); // location 정보
-  const id = state ? state.id : null;
+  // const { state } = useLocation(); // location 정보
+  // const id = state ? state.id : null;
 
   return (
     <main className={styles.home}>
